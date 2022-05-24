@@ -1,11 +1,19 @@
 import React from 'react';
 import Products from '../components/Products';
 import { getProductsFromCategoryAndQuery } from '../services/api';
+import PropTypes from 'prop-types';
+
 
 class Search extends React.Component {
     state = {
       valueInput: '',
       productList: [],
+    //   stateRedirect: false,
+    }
+
+    redirectCarrinho = () => {
+      const { history } = this.props;
+      history.push('carrinho');
     }
 
     handleChange = ({ target }) => {
@@ -28,6 +36,7 @@ class Search extends React.Component {
     render() {
       const { valueInput, productList } = this.state;
       const verificaInput = valueInput < 1;
+
       return (
         <div>
           <label htmlFor="search">
@@ -47,6 +56,7 @@ class Search extends React.Component {
           >
             Pesquisar
           </button>
+
           { verificaInput
             && (
               <p data-testid="home-initial-message">
@@ -61,9 +71,23 @@ class Search extends React.Component {
                 price={ produto.price }
               />))}
           </div>
+              </p>
+            )}
+          <button
+            type="button"
+            data-testid="shopping-cart-button"
+            onClick={ this.redirectCarrinho }
+          >
+            Carrinho de compras
+
+          </button>
         </div>
       );
     }
 }
 
 export default Search;
+
+Search.propTypes = {
+  history: PropTypes.string.isRequired,
+};
