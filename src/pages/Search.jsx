@@ -13,11 +13,10 @@ class Search extends React.Component {
           <label htmlFor="search">
             <input type="text" id="search" value={ valueInput } />
           </label>
-          { verificaInput ? 
+          { verificaInput && (
             <p data-testid="home-initial-message">
               Digite algum termo de pesquisa ou escolha uma categoria.
-            </p>
-            : ''}
+            </p>)}
         </div>
       );
     }
