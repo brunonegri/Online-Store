@@ -3,11 +3,11 @@ export async function getCategories() {
   const url = 'https://api.mercadolibre.com/sites/MLB/categories';
   const promise = await fetch(url);
   const data = await promise.json();
-  console.log(data);
+  // console.log(data);
   return data;
 }
 
-console.log(getCategories());
+// console.log(getCategories());
 
 export async function getProductsFromCategoryAndQuery(categoryId, query) {
   // Implemente aqui! Quando o fizer, descomente os parâmetros que essa função recebe
@@ -18,19 +18,18 @@ export async function getProductsFromCategoryAndQuery(categoryId, query) {
   if (categoryId === '' && query !== '') {
     const promise = await fetch(queryUrl);
     const data = await promise.json();
-    console.log(data);
     return data;
   }
   if (categoryId !== '' && query === '') {
     const promise = await fetch(categoryUrl);
     const data = await promise.json();
-    console.log(data);
     return data;
   }
   if (categoryId !== '' && query !== '') {
     const promise = await fetch(categoryAndQueryUrl);
     const data = await promise.json();
-    console.log(data);
     return data;
   }
 }
+
+// console.log(getProductsFromCategoryAndQuery('', 'Fone'));
