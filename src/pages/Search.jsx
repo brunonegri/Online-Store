@@ -1,8 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Products from '../components/Products';
 import { getProductsFromCategoryAndQuery } from '../services/api';
-import PropTypes from 'prop-types';
-
 
 class Search extends React.Component {
     state = {
@@ -71,8 +70,6 @@ class Search extends React.Component {
                 price={ produto.price }
               />))}
           </div>
-              </p>
-            )}
           <button
             type="button"
             data-testid="shopping-cart-button"
