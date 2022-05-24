@@ -5,16 +5,33 @@ class Search extends React.Component {
       valueInput: '',
     }
 
+    handleChange = ({ target }) => {
+      const { name, value } = target;
+      this.setState({
+        [name]: value,
+      });
+    }
+
     render() {
       const { valueInput } = this.state;
       const verificaInput = valueInput < 1;
       return (
         <div>
           <label htmlFor="search">
-            <input type="text" id="search" value={ valueInput } />
+            <input
+              data-testid="query-input"
+              name="valueInput"
+              type="text"
+              id="search"
+              onChange={ this.handleChange }
+              value={ valueInput }
+            />
           </label>
-          { verificaInput ? <p data-testid="home-initial-message">Digite algum termo de pesquisa ou escolha uma categoria.</p>
-            : ''}
+          { verificaInput
+            && (
+              <p data-testid="home-initial-message">
+                Digite algum termo de pesquisa ou escolha uma categoria.
+              </p>)}
         </div>
       );
     }

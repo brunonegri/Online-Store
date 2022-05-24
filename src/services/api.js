@@ -18,19 +18,16 @@ export async function getProductsFromCategoryAndQuery(categoryId, query) {
   if (categoryId === '' && query !== '') {
     const promise = await fetch(queryUrl);
     const data = await promise.json();
-    console.log(data);
     return data;
   }
   if (categoryId !== '' && query === '') {
     const promise = await fetch(categoryUrl);
     const data = await promise.json();
-    console.log(data);
     return data;
   }
   if (categoryId !== '' && query !== '') {
     const promise = await fetch(categoryAndQueryUrl);
     const data = await promise.json();
-    console.log(data);
     return data;
   }
 }
