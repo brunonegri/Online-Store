@@ -1,13 +1,20 @@
 import React from 'react';
 
 export default class Carrinho extends React.Component {
-  render() {
-    return (
-      <div>
-        <h1>Carrinho de Compras</h1>
-        <p data-testid="shopping-cart-empty-message"> Seu carrinho está vazio</p>
+    state = {
+      cartList: [],
+    }
 
-      </div>
-    );
-  }
+    render() {
+      const { cartList } = this.state;
+      return (
+        <div>
+          <h1>Carrinho de Compras</h1>
+          {(cartList.length === 0) && (
+            <p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>
+          )}
+
+        </div>
+      );
+    }
 }

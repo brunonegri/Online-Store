@@ -29,6 +29,7 @@ class Search extends React.Component {
             )}
           <button
             type="button"
+            data-testid="shopping-cart-button"
             onClick={ this.redirectCarrinho }
           >
             Carrinho de compras
