@@ -6,7 +6,6 @@ import ListCategories from '../components/ListCategories';
 import './Search.css';
 import AddToCartButton from '../components/AddToCartButton';
 import RedirectToCartButton from '../components/RedirectToCartButton';
-import { setLocalSt } from '../services/funcCarrinho';
 
 class Search extends React.Component {
   state = {

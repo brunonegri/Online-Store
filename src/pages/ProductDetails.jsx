@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import getProductsDetailsByID from '../services/api';<<<<<<< main-group-24-req-9
+import getProductsDetailsByID from '../services/api';
 import AddToCartButton from '../components/AddToCartButton';
 import RedirectToCartButton from '../components/RedirectToCartButton';
 import RedAvaliacoes from '../components/RedAvaliacoes';
