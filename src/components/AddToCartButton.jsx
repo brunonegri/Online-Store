@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { setLocalSt } from '../services/funcCarrinho';
 
 class AddToCartButton extends React.Component {
   addProduct = () => {
@@ -9,7 +10,7 @@ class AddToCartButton extends React.Component {
     if (!cartListStoraged) cartListStoraged = [];
     const cartList = [...(cartListStoraged), { value, name, quantity }];
     console.log(cartListStoraged);
-    localStorage.setItem(
+    setLocalSt(
       'carrinho',
       JSON.stringify(cartList),
     );
