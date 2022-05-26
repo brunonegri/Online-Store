@@ -30,4 +30,3 @@ ListCategories.propTypes = {
 };
 
 export default ListCategories;
-
