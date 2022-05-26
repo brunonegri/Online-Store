@@ -5,6 +5,13 @@ export default class Carrinho extends React.Component {
       cartList: [],
     }
 
+    componentDidMount() {
+      const cartList = localStorage.getItem('carrinho');
+      if (cartList) {
+        this.setState({ cartList: JSON.parse(cartList) });
+      }
+    }
+
     render() {
       const { cartList } = this.state;
       return (
@@ -13,6 +20,18 @@ export default class Carrinho extends React.Component {
           {(cartList.length === 0) && (
             <p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>
           )}
+          <div>
+            {cartList.map((item) => (
+              <div
+                key={ item.name }
+              >
+                <p data-testid="shopping-cart-product-name">{item.name}</p>
+                <p>{item.value}</p>
+                <p data-testid="shopping-cart-product-quantity">{item.quantity}</p>
+              </div>
+            ))}
+
+          </div>
 
         </div>
       );

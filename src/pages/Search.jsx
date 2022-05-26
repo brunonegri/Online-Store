@@ -11,11 +11,23 @@ class Search extends React.Component {
     productList: [],
     category: [],
     prodListCategory: [],
+    carrinhoProdList: [],
   }
 
   async componentDidMount() {
     const showCategories = await getCategories();
     this.setState({ category: showCategories });
+  }
+
+  addProduct = ({ target }) => {
+    const { value, name } = target;
+    const quantity = 1;
+    this.setState((prev) => ({
+      carrinhoProdList: [...prev.carrinhoProdList, { name, value, quantity }] }),
+    () => {
+      const { carrinhoProdList } = this.state;
+      localStorage.setItem('carrinho', JSON.stringify(carrinhoProdList));
+    });
   }
 
   redirectCarrinho = () => {
@@ -99,7 +111,6 @@ class Search extends React.Component {
             <fieldset className="categorias">
               {category.map((item) => (
                 <ListCategories
-                  key={ item.name }
                   category="category"
                   handleChangeCategory={ this.handleChangeCategory }
                   value={ item.id }
@@ -115,11 +126,9 @@ class Search extends React.Component {
                   <div
                     className="produto"
                     key={ item.id }
-                    keys={ item.id }
-                  >
+              
                     <Products
                       key={ item.id }
-                      keys={ item.id }
                       name={ item.title }
                       imagem={ item.thumbnail }
                       price={ item.price }
@@ -127,7 +136,9 @@ class Search extends React.Component {
                     <button
                       data-testid="product-add-to-cart"
                       type="submit"
-                      onClick={ this.redirectCarrinho }
+                      name={ item.title }
+                      value={ item.price }
+                      onClick={ this.addProduct }
                     >
                       Adicionar ao carrinho
                     </button>
@@ -144,6 +155,9 @@ class Search extends React.Component {
 
 export default Search;
 
+Search.defaultProps = {
+  history: {},
+};
 Search.propTypes = {
-  history: PropTypes.string.isRequired,
+  history: PropTypes.objectOf(PropTypes.any),
 };
