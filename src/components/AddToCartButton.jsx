@@ -9,7 +9,6 @@ class AddToCartButton extends React.Component {
     let cartListStoraged = JSON.parse(localStorage.getItem('carrinho'));
     if (!cartListStoraged) cartListStoraged = [];
     const cartList = [...(cartListStoraged), { value, name, quantity }];
-    console.log(cartListStoraged);
     setLocalSt(
       'carrinho',
       JSON.stringify(cartList),

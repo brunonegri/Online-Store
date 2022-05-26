@@ -63,17 +63,6 @@ class ProductDetails extends React.Component {
     return (
       <div>
         <RedirectToCartButton />
-        <h2 data-testid="product-detail-name">{ title }</h2>
-        <img src={ thumbnail } alt={ title } />
-        <p>
-          Preço:
-          { price }
-        </p>
-        <AddToCartButton
-          name={ title }
-          value={ price }
-          dataTestId="product-detail-add-to-cart"
-        />
         <div>
           <h2 data-testid="product-detail-name">{ title }</h2>
           <img src={ thumbnail } alt={ title } />
@@ -81,6 +70,13 @@ class ProductDetails extends React.Component {
             Preço:
             { price }
           </p>
+
+          <AddToCartButton
+            nome = { title }
+            name={ title }
+            value={ price }
+            dataTestId="product-detail-add-to-cart"
+          />
         </div>
         <fieldset>
           <legend>Deixe sua avaliação:</legend>
