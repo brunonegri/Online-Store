@@ -1,19 +1,40 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Products from '../components/Products';
-import { getProductsFromCategoryAndQuery } from '../services/api';
+import { getCategories, getProductsFromCategoryAndQuery } from '../services/api';
+import ListCategories from '../components/ListCategories';
+import './Search.css';
+import { setLocalSt } from '../services/funcCarrinho';
 
 class Search extends React.Component {
-    state = {
-      valueInput: '',
-      productList: [],
-    //   stateRedirect: false,
-    }
+  state = {
+    valueInput: '',
+    productList: [],
+    category: [],
+    prodListCategory: [],
+    carrinhoProdList: [],
+  }
 
-    redirectCarrinho = () => {
-      const { history } = this.props;
-      history.push('carrinho');
-    }
+  async componentDidMount() {
+    const showCategories = await getCategories();
+    this.setState({ category: showCategories });
+  }
+
+  addProduct = ({ target }) => {
+    const { value, name } = target;
+    const quantity = 1;
+    this.setState((prev) => ({
+      carrinhoProdList: [...prev.carrinhoProdList, { name, value, quantity }] }),
+    () => {
+      const { carrinhoProdList } = this.state;
+      setLocalSt('carrinho', JSON.stringify(carrinhoProdList));
+    });
+  }
+
+  redirectCarrinho = () => {
+    const { history } = this.props;
+    history.push('/carrinho');
+  }
 
     handleChange = ({ target }) => {
       const { name, value } = target;
@@ -29,11 +50,16 @@ class Search extends React.Component {
       this.setState({
         productList: results,
       });
-      // console.log(results);
+    }
+
+    handleChangeCategory = async ({ target }) => {
+      const { value } = target;
+      const itensPorCategoria = await getProductsFromCategoryAndQuery(value);
+      this.setState({ prodListCategory: itensPorCategoria.results });
     }
 
     render() {
-      const { valueInput, productList } = this.state;
+      const { valueInput, productList, category, prodListCategory } = this.state;
       const verificaInput = valueInput < 1;
 
       return (
@@ -78,6 +104,49 @@ class Search extends React.Component {
             Carrinho de compras
 
           </button>
+
+          <h1>Categoria:</h1>
+          <div className="container-categorias-produtos">
+            <fieldset className="categorias">
+              {category.map((item) => (
+                <ListCategories
+                  key={ item.id }
+                  category="category"
+                  handleChangeCategory={ this.handleChangeCategory }
+                  value={ item.id }
+                  nome={ item.name }
+                />
+              ))}
+            </fieldset>
+
+            <div className="lista-de-produtos">
+              {
+                prodListCategory.map((item) => (
+                  <div
+                    className="produto"
+                    key={ item.id }
+                  >
+                    <Products
+                      key={ item.id }
+                      name={ item.title }
+                      imagem={ item.thumbnail }
+                      price={ item.price }
+                    />
+                    <button
+                      data-testid="product-add-to-cart"
+                      type="submit"
+                      name={ item.title }
+                      value={ item.price }
+                      onClick={ this.addProduct }
+                    >
+                      Adicionar ao carrinho
+                    </button>
+
+                  </div>
+                ))
+              }
+            </div>
+          </div>
         </div>
       );
     }
@@ -85,6 +154,9 @@ class Search extends React.Component {
 
 export default Search;
 
+Search.defaultProps = {
+  history: {},
+};
 Search.propTypes = {
-  history: PropTypes.string.isRequired,
+  history: PropTypes.objectOf(PropTypes.any),
 };

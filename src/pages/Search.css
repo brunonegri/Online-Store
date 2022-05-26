@@ -1,0 +1,24 @@
+.container-categorias-produtos {
+  display: flex;
+  flex-direction: row;
+}
+
+.categorias {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  min-width: 230px;
+}
+
+.lista-de-produtos {
+  border: 1px solid black;
+  display: flex;
+  flex-wrap: wrap;
+  width: 900px;
+}
+
+.produto {
+  border: 1px solid black;
+  margin: 10px;
+  width: 200px;
+}
