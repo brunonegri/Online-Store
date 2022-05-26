@@ -1,5 +1,4 @@
 import React from 'react';
-import { getLocalSt } from '../services/funcCarrinho';
 
 export default class Carrinho extends React.Component {
     state = {
@@ -7,7 +6,7 @@ export default class Carrinho extends React.Component {
     }
 
     componentDidMount() {
-      const cartList = getLocalSt('carrinho');
+      const cartList = localStorage.getItem('carrinho');
       if (cartList) {
         this.setState({ cartList: JSON.parse(cartList) });
       }
@@ -18,9 +17,9 @@ export default class Carrinho extends React.Component {
       return (
         <div>
           <h1>Carrinho de Compras</h1>
-          {(cartList.length === 0)
-            && <p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>}
-
+          {(cartList.length === 0) && (
+            <p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>
+          )}
           <div>
             {cartList.map((item) => (
               <div
@@ -31,6 +30,7 @@ export default class Carrinho extends React.Component {
                 <p data-testid="shopping-cart-product-quantity">{item.quantity}</p>
               </div>
             ))}
+
           </div>
 
         </div>

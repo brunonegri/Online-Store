@@ -4,7 +4,6 @@ import Products from '../components/Products';
 import { getCategories, getProductsFromCategoryAndQuery } from '../services/api';
 import ListCategories from '../components/ListCategories';
 import './Search.css';
-import { setLocalSt } from '../services/funcCarrinho';
 
 class Search extends React.Component {
   state = {
@@ -27,13 +26,13 @@ class Search extends React.Component {
       carrinhoProdList: [...prev.carrinhoProdList, { name, value, quantity }] }),
     () => {
       const { carrinhoProdList } = this.state;
-      setLocalSt('carrinho', JSON.stringify(carrinhoProdList));
+      localStorage.setItem('carrinho', JSON.stringify(carrinhoProdList));
     });
   }
 
   redirectCarrinho = () => {
     const { history } = this.props;
-    history.push('/carrinho');
+    history.push('carrinho');
   }
 
     handleChange = ({ target }) => {
@@ -50,6 +49,7 @@ class Search extends React.Component {
       this.setState({
         productList: results,
       });
+      // console.log(results);
     }
 
     handleChangeCategory = async ({ target }) => {
