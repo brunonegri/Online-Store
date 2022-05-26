@@ -22,8 +22,6 @@ class ListCategories extends React.Component {
   }
 }
 
-export default ListCategories;
-
 ListCategories.propTypes = {
   key: PropTypes.string.isRequired,
   category: PropTypes.string.isRequired,
@@ -31,3 +29,5 @@ ListCategories.propTypes = {
   value: PropTypes.string.isRequired,
   nome: PropTypes.string.isRequired,
 };
+
+export default ListCategories;
