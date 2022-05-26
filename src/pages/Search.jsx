@@ -91,7 +91,6 @@ class Search extends React.Component {
             {productList.map((produto) => (
               <Products
                 key={ produto.id }
-                keys={ produto.id }
                 name={ produto.title }
                 imagem={ produto.thumbnail }
                 price={ produto.price }
@@ -111,10 +110,10 @@ class Search extends React.Component {
             <fieldset className="categorias">
               {category.map((item) => (
                 <ListCategories
+                  key={ item.id }
                   category="category"
                   handleChangeCategory={ this.handleChangeCategory }
                   value={ item.id }
-                  keys={ item.id }
                   nome={ item.name }
                 />
               ))}
@@ -126,7 +125,7 @@ class Search extends React.Component {
                   <div
                     className="produto"
                     key={ item.id }
-              
+                  >
                     <Products
                       key={ item.id }
                       name={ item.title }
