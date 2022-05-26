@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Products from '../components/Products';
 import { getCategories, getProductsFromCategoryAndQuery } from '../services/api';
-import ListCategories from './ListCategories';
+import ListCategories from '../components/ListCategories';
 
 class Search extends React.Component {
   state = {
