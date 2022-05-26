@@ -127,7 +127,6 @@ class Search extends React.Component {
                     key={ item.id }
                   >
                     <Products
-                      // key={ item.id }
                       name={ item.title }
                       imagem={ item.thumbnail }
                       price={ item.price }
