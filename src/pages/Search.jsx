@@ -6,6 +6,7 @@ import ListCategories from '../components/ListCategories';
 import './Search.css';
 import AddToCartButton from '../components/AddToCartButton';
 import RedirectToCartButton from '../components/RedirectToCartButton';
+import { setLocalSt } from '../services/funcCarrinho';
 
 class Search extends React.Component {
   state = {
@@ -27,7 +28,7 @@ class Search extends React.Component {
       carrinhoProdList: [...prev.carrinhoProdList, { name, value, quantity }] }),
     () => {
       const { carrinhoProdList } = this.state;
-      localStorage.setItem('carrinho', JSON.stringify(carrinhoProdList));
+      setLocalSt('carrinho', JSON.stringify(carrinhoProdList));
     });
   } */
 
@@ -92,6 +93,7 @@ class Search extends React.Component {
             {productList.map((produto) => (
               <Products
                 key={ produto.id }
+                keys={ produto.id }
                 name={ produto.title }
                 imagem={ produto.thumbnail }
                 price={ produto.price }
@@ -112,6 +114,7 @@ class Search extends React.Component {
             <fieldset className="categorias">
               {category.map((item) => (
                 <ListCategories
+                  keys={ item.id }
                   key={ item.id }
                   category="category"
                   handleChangeCategory={ this.handleChangeCategory }
@@ -127,8 +130,11 @@ class Search extends React.Component {
                   <div
                     className="produto"
                     key={ item.id }
+                    keys={ item.id }
                   >
                     <Products
+                      key={ item.id }
+                      keys={ item.id }
                       name={ item.title }
                       imagem={ item.thumbnail }
                       price={ item.price }
