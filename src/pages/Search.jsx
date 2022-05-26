@@ -4,6 +4,8 @@ import Products from '../components/Products';
 import { getCategories, getProductsFromCategoryAndQuery } from '../services/api';
 import ListCategories from '../components/ListCategories';
 import './Search.css';
+import AddToCartButton from '../components/AddToCartButton';
+import RedirectToCartButton from '../components/RedirectToCartButton';
 
 class Search extends React.Component {
   state = {
@@ -11,7 +13,6 @@ class Search extends React.Component {
     productList: [],
     category: [],
     prodListCategory: [],
-    carrinhoProdList: [],
   }
 
   async componentDidMount() {
@@ -19,7 +20,7 @@ class Search extends React.Component {
     this.setState({ category: showCategories });
   }
 
-  addProduct = ({ target }) => {
+  /* addProduct = ({ target }) => {
     const { value, name } = target;
     const quantity = 1;
     this.setState((prev) => ({
@@ -28,7 +29,7 @@ class Search extends React.Component {
       const { carrinhoProdList } = this.state;
       localStorage.setItem('carrinho', JSON.stringify(carrinhoProdList));
     });
-  }
+  } */
 
   redirectCarrinho = () => {
     const { history } = this.props;
@@ -96,14 +97,15 @@ class Search extends React.Component {
                 price={ produto.price }
               />))}
           </div>
-          <button
+          {/* <button
             type="button"
             data-testid="shopping-cart-button"
             onClick={ this.redirectCarrinho }
           >
             Carrinho de compras
 
-          </button>
+          </button> */}
+          <RedirectToCartButton />
 
           <h1>Categoria:</h1>
           <div className="container-categorias-produtos">
@@ -131,7 +133,7 @@ class Search extends React.Component {
                       imagem={ item.thumbnail }
                       price={ item.price }
                     />
-                    <button
+                    {/* <button
                       data-testid="product-add-to-cart"
                       type="submit"
                       name={ item.title }
@@ -139,7 +141,12 @@ class Search extends React.Component {
                       onClick={ this.addProduct }
                     >
                       Adicionar ao carrinho
-                    </button>
+                    </button> */}
+                    <AddToCartButton
+                      name={ item.title }
+                      value={ item.price }
+                      dataTestId="product-add-to-cart"
+                    />
 
                   </div>
                 ))
