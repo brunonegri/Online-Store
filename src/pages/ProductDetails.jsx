@@ -72,7 +72,6 @@ class ProductDetails extends React.Component {
           </p>
 
           <AddToCartButton
-            nome = { title }
             name={ title }
             value={ price }
             dataTestId="product-detail-add-to-cart"
