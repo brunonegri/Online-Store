@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import getProductsDetailsByID from '../services/api';
+import AddToCartButton from '../components/AddToCartButton';
+import RedirectToCartButton from '../components/RedirectToCartButton';
 import RedAvaliacoes from '../components/RedAvaliacoes';
 
 class ProductDetails extends React.Component {
@@ -60,6 +62,7 @@ class ProductDetails extends React.Component {
     const { title, price, thumbnail } = product;
     return (
       <div>
+        <RedirectToCartButton />
         <div>
           <h2 data-testid="product-detail-name">{ title }</h2>
           <img src={ thumbnail } alt={ title } />
@@ -67,6 +70,12 @@ class ProductDetails extends React.Component {
             Preço:
             { price }
           </p>
+
+          <AddToCartButton
+            name={ title }
+            value={ price }
+            dataTestId="product-detail-add-to-cart"
+          />
         </div>
         <fieldset>
           <legend>Deixe sua avaliação:</legend>
