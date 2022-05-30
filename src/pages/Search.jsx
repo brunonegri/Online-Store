@@ -22,7 +22,7 @@ class Search extends React.Component {
   addProduct = ({ target }) => {
     // console.log(target);
     const { value, name } = target;
-    const quantity = 1;
+    const quantity = '1';
     this.setState((prev) => ({
       carrinhoProdList: [...prev.carrinhoProdList, { name, value, quantity }] }),
     () => {

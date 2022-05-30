@@ -15,27 +15,36 @@ export default class Carrinho extends React.Component {
 
     increaseQuantity = (index) => {
       const { cartList } = this.state;
-      this.setState(() => {
-        cartList.map((item, indexZ) => {
+      this.setState({
+        cartList: cartList.map((item, indexZ) => {
           if (index === indexZ) {
-            console.log(item);
-            item.quantity += 1;
+            const sum = Number(item.quantity) + 1;
+            const objItem = {
+              name: item.name,
+              quantity: String(sum),
+              value: item.value,
+            };
+            return objItem;
           }
           return item;
-        });
+        }),
       });
     }
 
     decreaseQuantity = (index) => {
       const { cartList } = this.state;
-      this.setState(() => {
-        cartList.map((item, indexZ) => {
+      this.setState({
+        cartList: cartList.map((item, indexZ) => {
           if (index === indexZ) {
-            console.log(item);
-            item.quantity -= 1;
+            const obj = {
+              name: item.name,
+              quantity: String(item.quantity - 1),
+              value: item.value,
+            };
+            return obj;
           }
           return item;
-        });
+        }),
       });
     }
 
@@ -62,13 +71,12 @@ export default class Carrinho extends React.Component {
                 >
                   +
                 </button>
-                <input
-                  data-testid="shopping-cart-product-quantity"
-                  type="number"
-                  value={ item.quantity }
-                />
+                <span min="1" data-testid="shopping-cart-product-quantity">
+                  { item.quantity }
+                </span>
                 <button
                   data-testid="product-decrease-quantity"
+                  disabled={ item.quantity <= 1 }
                   onClick={ () => this.decreaseQuantity(index) }
                   type="button"
                 >
