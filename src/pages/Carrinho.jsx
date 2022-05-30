@@ -10,6 +10,42 @@ export default class Carrinho extends React.Component {
       if (cartList) {
         this.setState({ cartList: JSON.parse(cartList) });
       }
+      // console.log(cartList);
+    }
+
+    increaseQuantity = (index) => {
+      const { cartList } = this.state;
+      this.setState({
+        cartList: cartList.map((item, indexZ) => {
+          if (index === indexZ) {
+            const sum = Number(item.quantity) + 1;
+            const objItem = {
+              name: item.name,
+              quantity: String(sum),
+              value: item.value,
+            };
+            return objItem;
+          }
+          return item;
+        }),
+      });
+    }
+
+    decreaseQuantity = (index) => {
+      const { cartList } = this.state;
+      this.setState({
+        cartList: cartList.map((item, indexZ) => {
+          if (index === indexZ) {
+            const obj = {
+              name: item.name,
+              quantity: String(item.quantity - 1),
+              value: item.value,
+            };
+            return obj;
+          }
+          return item;
+        }),
+      });
     }
 
     render() {
@@ -21,13 +57,31 @@ export default class Carrinho extends React.Component {
             <p data-testid="shopping-cart-empty-message">Seu carrinho está vazio</p>
           )}
           <div>
-            {cartList.map((item) => (
+            {cartList.map((item, index) => (
               <div
-                key={ item.name }
+                key={ index }
               >
                 <p data-testid="shopping-cart-product-name">{item.name}</p>
                 <p>{item.value}</p>
-                <p data-testid="shopping-cart-product-quantity">{item.quantity}</p>
+                <button
+                  name={ item.name }
+                  onClick={ () => this.increaseQuantity(index) }
+                  data-testid="product-increase-quantity"
+                  type="button"
+                >
+                  +
+                </button>
+                <span min="1" data-testid="shopping-cart-product-quantity">
+                  { item.quantity }
+                </span>
+                <button
+                  data-testid="product-decrease-quantity"
+                  disabled={ item.quantity <= 1 }
+                  onClick={ () => this.decreaseQuantity(index) }
+                  type="button"
+                >
+                  -
+                </button>
               </div>
             ))}
 
